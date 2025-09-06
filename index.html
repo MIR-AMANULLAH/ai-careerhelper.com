@@ -92,13 +92,25 @@
     /* Responsive */
     @media (max-width: 768px) {
       header { font-size: 3rem; padding: 20px 0; }
-      .logo { width: 120px; height: 120px; }
+      .logo { 
+        width: 120px; 
+        height: 120px; 
+        top: 90px; 
+        left: 50%; 
+        transform: translateX(-50%);
+      }
       .start-btn { font-size: 1.2rem; padding: 12px 24px; }
       footer { font-size: 1.5rem; }
     }
     @media (max-width: 480px) {
       header { font-size: 2.5rem; }
-      .logo { width: 100px; height: 100px; left: 15px; top: 15px; }
+      .logo { 
+        width: 100px; 
+        height: 100px; 
+        top: 70px; 
+        left: 50%; 
+        transform: translateX(-50%);
+      }
       .start-btn { font-size: 1rem; padding: 10px 20px; }
       footer { font-size: 1.2rem; }
     }
