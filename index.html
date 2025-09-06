@@ -3,22 +3,11 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="Cache-Control"
-  content="max-age=31536000,must-revalidate">
+  <meta http-equiv="Cache-Control" content="max-age=31536000,must-revalidate">
   <title>AI Career Helper – Amaan</title>
   <meta name="description" content="AI Career Helper by Amaan - guiding careers with AI-powered insights and tools.">
   <meta name="keywords" content="AI Career Helper, Amaan, career guidance, AI tools, future jobs">
   <meta name="author" content="Amaan Mir">
-
-  <!-- Open Graph (for social sharing) -->
-  <meta property="og:title" content="AI Career Helper – Amaan">
-  <meta property="og:description" content="Guiding careers with AI-powered insights and tools.">
-  <meta property="og:image" content="https://i.pinimg.com/736x/9b/4b/c2/9b4bc2bb1af72777db9eb8f79166bdb6.jpg">
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://yourdomain.com">
-
-  <!-- Favicon -->
-  <link rel="icon" type="image/png" href="https://i.pinimg.com/736x/9b/4b/c2/9b4bc2bb1af72777db9eb8f79166bdb6.jpg">
 
   <style>
     * {
@@ -45,7 +34,7 @@
       font-size: 4rem;
       font-weight: 800;
       color: #0072ff;
-      padding: 30px 0;
+      padding: 80px 0 30px 0; /* extra space below logo */
       animation: colorShift 6s infinite alternate;
     }
     @keyframes colorShift {
@@ -95,7 +84,7 @@
       box-shadow: 0 5px 20px rgba(0,0,0,0.2);
     }
 
-    /* About Admin (Right Side) */
+    /* About Admin */
     aside {
       position: absolute;
       top: 200px;
@@ -107,6 +96,7 @@
       box-shadow: 0 8px 25px rgba(0,0,0,0.2);
       text-align: center;
       animation: fadeIn 1.5s ease;
+      display: none; /* hidden by default */
     }
     aside img {
       width: 100px;
@@ -150,9 +140,38 @@
       font-weight: 500;
       box-shadow: 0 3px 10px rgba(0,0,0,0.15);
     }
+    aside .contact-btn {
+      display: inline-block;
+      margin-top: 15px;
+      padding: 8px 16px;
+      background: #0072ff;
+      color: white;
+      border-radius: 10px;
+      text-decoration: none;
+      font-size: 0.9rem;
+      transition: 0.3s;
+    }
+    aside .contact-btn:hover {
+      background: #005ac1;
+    }
     @keyframes fadeIn {
       from { opacity: 0; transform: translateX(50px); }
       to { opacity: 1; transform: translateX(0); }
+    }
+
+    /* Toggle Button */
+    .toggle-btn {
+      position: absolute;
+      top: 200px;
+      right: 20px;
+      padding: 10px 15px;
+      background: #0072ff;
+      color: white;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      font-size: 0.9rem;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.2);
     }
 
     /* Footer */
@@ -171,6 +190,11 @@
         right: 0;
         top: 0;
       }
+      .toggle-btn {
+        position: relative;
+        margin: 20px auto;
+        display: block;
+      }
     }
   </style>
 </head>
@@ -180,11 +204,15 @@
   <img src="https://thvnext.bing.com/th/id/OIP.ENrZMwnNL5EtksnhsgXP6gHaE_?r=0&o=7&cb=ucfimg2rm=3&ucfimg=1&rs=1&pid=ImgDetMain&o=7&rm=3" 
        alt="Logo" class="logo">
 
+  <!-- Toggle Button -->
+  <button class="toggle-btn" onclick="toggleAdmin()">Show Admin</button>
+
   <!-- About Admin -->
-  <aside>
+  <aside id="admin-section">
     <img src="IMG_20250828_205720_676.webp" alt="Admin">
     <h2>Amaan Mir</h2>
-    <h3>Founder of CareerHelper • Kashmir</h3>
+    <h3>Founder of CareerHelper 
+      • Kashmir</h3>
     <p>Passionate developer with mastery in modern technologies and dedicated to guiding careers with AI-powered insights.</p>
     <div class="skills">
       <span class="skill">HTML</span>
@@ -192,6 +220,7 @@
       <span class="skill">PHP</span>
       <span class="skill">Java</span>
     </div>
+    <a href="mailto:amanmeer0202@gmail.com" class="contact-btn">📧 Contact Me</a>
   </aside>
 
   <main>
@@ -199,5 +228,19 @@
   </main>
 
   <footer>Amaan Mir</footer>
+
+  <script>
+    function toggleAdmin() {
+      const aside = document.getElementById('admin-section');
+      const btn = document.querySelector('.toggle-btn');
+      if (aside.style.display === 'none' || aside.style.display === '') {
+        aside.style.display = 'block';
+        btn.textContent = "Hide Admin";
+      } else {
+        aside.style.display = 'none';
+        btn.textContent = "Show Admin";
+      }
+    }
+  </script>
 </body>
 </html>
