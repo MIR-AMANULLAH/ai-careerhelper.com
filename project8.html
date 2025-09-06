@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CareerHelper – Interactive Chat</title>
+<style>
+body {margin:0;font-family:"Segoe UI", Roboto, sans-serif;background:#f8f9fb;color:#333;line-height:1.6;}
+header {display:flex;justify-content:space-between;align-items:center;padding:20px 60px;background:#fff;box-shadow:0 2px 10px rgba(0,0,0,0.05);position:sticky;top:0;z-index:1000;}
+header h1 {font-size:24px;color:#0072ff;font-weight:bold;cursor:pointer;}
+nav a {margin:0 15px;text-decoration:none;color:#333;font-weight:500;transition:0.3s;}
+nav a:hover {color:#0072ff;}
+.hero {background:linear-gradient(to right,#0072ff,#00c6ff);color:white;text-align:center;padding:120px 20px;}
+.hero h2 {font-size:52px;margin-bottom:15px;}
+.hero p {font-size:20px;margin-bottom:30px;}
+.chat-container {max-width:700px;margin:40px auto;background:#fff;border-radius:12px;box-shadow:0 5px 20px rgba(0,0,0,0.1);overflow:hidden;}
+.chat-header {padding:15px;background:#0072ff;color:#fff;font-weight:bold;text-align:center;}
+.chat-messages {height:500px;overflow-y:auto;padding:15px;font-size:14px;background:#f9f9f9;}
+.chat-messages div {margin-bottom:12px;}
+.chat-messages button {margin:4px 4px 0 0;padding:6px 12px;background:#0072ff;color:#fff;border:none;border-radius:6px;cursor:pointer;}
+.chat-messages button:hover {background:#005edc;}
+.chat-input {display:flex;border-top:1px solid #ddd;}
+.chat-input input {flex:1;padding:12px;border:none;outline:none;font-size:14px;}
+.chat-input button {background:#0072ff;border:none;color:white;padding:12px 18px;cursor:pointer;}
+</style>
+</head>
+<body>
+
+<header>
+  <h1 onclick="window.location.href='index.html'">CareerHelper</h1>
+  <nav>
+    <a href="project5.html">Jobs</a>
+    <a href="project6.html">Internships</a>
+    <a href="project7.html">Courses</a>
+    <a href="project8.html">Chat</a>
+  </nav>
+</header>
+
+<div class="hero">
+  <h2>Interactive AI Career Chat</h2>
+  <p>Click buttons inside the chat to navigate directly to Jobs, Internships, or Courses.</p>
+</div>
+
+<div class="chat-container">
+  <div class="chat-header">AI Career Helper</div>
+  <div class="chat-messages" id="chatMessages"></div>
+  <div class="chat-input">
+    <input type="text" id="chatInput" placeholder="Type your question here...">
+    <button onclick="sendMessage()">➤</button>
+  </div>
+</div>
+
+<script>
+const predefinedResponses = {
+  "hello":"Hello! 👋 I am your AI Career Helper. You can ask me about Jobs, Internships, Courses, or website navigation.",
+  "hi":"Hi there! 😊 I can guide you on jobs, internships, courses, and using this website.",
+  "jobs":"Check out these job openings:",
+  "internships":"Here are the current internship opportunities:",
+  "courses":"Check out these top courses:",
+  "how to apply":"Go to the Jobs page and click 'Apply Now' on any job card. Fill out the form with your CV and contact details.",
+  "how to enroll":"Go to the Courses page and click 'Enroll Now' on a course card. Fill the enrollment form.",
+  "website navigation":"Use the top menu to navigate: Jobs, Internships, Courses, Chat.",
+  "thank you":"You're welcome! 😊 Feel free to ask me anything else.",
+  "default":"I am your AI Career Helper. Ask me about Jobs, Internships, Courses, or navigation guidance."
+};
+
+function findResponse(message) {
+  message = message.toLowerCase();
+  for(const key in predefinedResponses) {
+    if(message.includes(key)) return key; // return the key to handle buttons
+  }
+  return "default";
+}
+
+function sendMessage() {
+  let input = document.getElementById("chatInput");
+  let messages = document.getElementById("chatMessages");
+
+  if(input.value.trim()!=="") {
+    // User message
+    let userMsg = document.createElement("div");
+    userMsg.style.color="#0072ff";
+    userMsg.textContent="You: "+input.value;
+    messages.appendChild(userMsg);
+    messages.scrollTop=messages.scrollHeight;
+
+    let key=findResponse(input.value.trim());
+    input.value="";
+
+    // Bot message
+    let botMsg=document.createElement("div");
+    botMsg.style.color="#333";
+
+    if(key==="jobs"){
+      botMsg.innerHTML="Bot: " + predefinedResponses[key]+"<br>";
+      let jobs=["Infosys Java Developer","TCS Frontend Developer","Wipro AI Engineer","Cognizant Java Backend"];
+      jobs.forEach(j=>{
+        let btn=document.createElement("button");
+        btn.textContent=j;
+        btn.onclick=()=>window.location.href="project5.html"; // navigate to jobs page
+        botMsg.appendChild(btn);
+      });
+    }
+    else if(key==="internships"){
+      botMsg.innerHTML="Bot: "+predefinedResponses[key]+"<br>";
+      let interns=["Frontend Intern @ StartUpX","Backend Intern @ Innovate Labs","Data Science Intern @ AI Hub"];
+      interns.forEach(i=>{
+        let btn=document.createElement("button");
+        btn.textContent=i;
+        btn.onclick=()=>window.location.href="project6.html"; // navigate to internships page
+        botMsg.appendChild(btn);
+      });
+    }
+    else if(key==="courses"){
+      botMsg.innerHTML="Bot: "+predefinedResponses[key]+"<br>";
+      let courses=["Python Basics – NPTEL","AI for Everyone – Coursera","Web Dev Bootcamp – YouTube","Java Advanced – Udemy"];
+      courses.forEach(c=>{
+        let btn=document.createElement("button");
+        btn.textContent=c;
+        btn.onclick=()=>window.location.href="project7.html"; // navigate to courses page
+        botMsg.appendChild(btn);
+      });
+    }
+    else{
+      botMsg.textContent="Bot: "+predefinedResponses[key];
+    }
+
+    messages.appendChild(botMsg);
+    messages.scrollTop=messages.scrollHeight;
+  }
+}
+
+document.getElementById("chatInput").addEventListener("keypress",function(e){
+  if(e.key==="Enter") sendMessage();
+});
+</script>
+
+</body>
+</html>

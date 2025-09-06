@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CareerHelper – Courses</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: "Segoe UI", Roboto, sans-serif;
+      background: #f8f9fb;
+      color: #333;
+      line-height: 1.6;
+    }
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 60px;
+      background: #fff;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+    header h1 { font-size: 24px; color: #0072ff; font-weight: bold; cursor: pointer; }
+    nav a { margin: 0 15px; text-decoration: none; color: #333; font-weight: 500; transition: 0.3s; }
+    nav a:hover { color: #0072ff; }
+    .hero { background: linear-gradient(to right, #0072ff, #00c6ff); color: white; text-align: center; padding: 120px 20px; }
+    .hero h2 { font-size: 52px; margin-bottom: 15px; }
+    .hero p { font-size: 20px; margin-bottom: 30px; }
+    .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
+    .card { background: #fff; border-radius: 12px; padding: 25px; box-shadow: 0 5px 20px rgba(0,0,0,0.1); transition: 0.3s; }
+    .card:hover { transform: translateY(-8px); box-shadow: 0 8px 25px rgba(0,0,0,0.15); }
+    .card h4 { margin-bottom: 10px; font-size: 20px; color: #0072ff; }
+    .card p { font-size: 15px; color: #555; }
+    .card .enroll-btn { margin-top: 10px; padding: 10px 16px; background: #0072ff; color: white; border: none; border-radius: 8px; cursor: pointer; transition: 0.3s; }
+    .card .enroll-btn:hover { background: #005edc; }
+    .form-section { padding: 80px 60px; max-width: 600px; margin: auto; background: #fff; border-radius: 12px; box-shadow: 0 5px 20px rgba(0,0,0,0.1); margin-bottom: 60px; }
+    .form-section h3 { text-align: center; color: #0072ff; margin-bottom: 30px; }
+    .form-section label { display: block; margin-bottom: 8px; font-weight: 500; }
+    .form-section input, .form-section select, .form-section textarea { width: 100%; padding: 12px; margin-bottom: 20px; border: 1px solid #ccc; border-radius: 8px; outline: none; font-size: 14px; }
+    .form-section button { padding: 12px 20px; background: #0072ff; color: white; border: none; border-radius: 8px; cursor: pointer; font-size: 16px; transition: 0.3s; }
+    .form-section button:hover { background: #005edc; }
+    .chatbot-btn { position: fixed; bottom: 20px; right: 20px; background: #0072ff; border: none; border-radius: 50%; width: 60px; height: 60px; cursor: pointer; font-size: 24px; color: white; box-shadow: 0 0 15px rgba(0,114,255,0.4); z-index: 1000; }
+    .chatbot-box { position: fixed; bottom: 90px; right: 20px; width: 350px; height: 500px; background: #fff; border-radius: 15px; display: none; flex-direction: column; box-shadow: 0 5px 25px rgba(0,0,0,0.2); overflow: hidden; }
+    .chat-header { padding: 12px; background: #0072ff; color: #fff; font-weight: bold; text-align: center; }
+    .chat-messages { flex: 1; padding: 15px; overflow-y: auto; font-size: 14px; }
+    .chat-input { display: flex; border-top: 1px solid #ddd; }
+    .chat-input input { flex: 1; padding: 12px; border: none; outline: none; }
+    .chat-input button { background: #0072ff; border: none; color: white; padding: 12px 18px; cursor: pointer; }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1 onclick="window.location.href='index.html'">CareerHelper</h1>
+  <nav>
+    <a href="project5.html">Jobs</a>
+    <a href="project6.html">Internships</a>
+    <a href="project7.html">Courses</a>
+    <a href="project8.html">Chat</a>
+  </nav>
+</header>
+
+<div class="hero">
+  <h2>Skill Enhancement Courses</h2>
+  <p>Enroll in top courses to boost your career in programming, AI, and web development.</p>
+</div>
+
+<section>
+  <h3>Available Courses</h3>
+  <div class="cards">
+    <div class="card">
+      <h4>Python Basics – NPTEL</h4>
+      <p>Learn Python programming with real-world projects and exercises.</p>
+      <button class="enroll-btn" onclick="scrollToForm('Python Basics – NPTEL')">Enroll Now</button>
+    </div>
+    <div class="card">
+      <h4>AI for Everyone – Coursera</h4>
+      <p>Understand AI concepts and applications without coding.</p>
+      <button class="enroll-btn" onclick="scrollToForm('AI for Everyone – Coursera')">Enroll Now</button>
+    </div>
+    <div class="card">
+      <h4>Web Dev Bootcamp – YouTube</h4>
+      <p>Free hands-on full-stack web development course.</p>
+      <button class="enroll-btn" onclick="scrollToForm('Web Dev Bootcamp – YouTube')">Enroll Now</button>
+    </div>
+    <div class="card">
+      <h4>Data Science Essentials – EdX</h4>
+      <p>Get started with data analysis, visualization, and Python tools.</p>
+      <button class="enroll-btn" onclick="scrollToForm('Data Science Essentials – EdX')">Enroll Now</button>
+    </div>
+  </div>
+</section>
+
+<!-- Form Section -->
+<section class="form-section" id="enrollForm">
+  <h3>Course Enrollment Form</h3>
+  <form id="courseForm">
+    <label for="courseTitle">Enrolling In</label>
+    <input type="text" id="courseTitle" name="courseTitle" readonly>
+
+    <label for="fullName">Full Name</label>
+    <input type="text" id="fullName" name="fullName" required>
+
+    <label for="email">Email Address</label>
+    <input type="email" id="email" name="email" required>
+
+    <label for="phone">Phone Number</label>
+    <input type="tel" id="phone" name="phone" required>
+
+    <button type="submit">Submit Enrollment</button>
+  </form>
+</section>
+
+<!-- Chatbot -->
+<button class="chatbot-btn" onclick="toggleChat()">💬</button>
+<div class="chatbot-box" id="chatbox">
+  <div class="chat-header">AI Career Chat</div>
+  <div class="chat-messages" id="chatMessages"></div>
+  <div class="chat-input">
+    <input type="text" id="chatInput" placeholder="Ask me...">
+    <button onclick="sendMessage()">➤</button>
+  </div>
+</div>
+
+<script>
+  function scrollToForm(course) {
+    document.getElementById("courseTitle").value = course;
+    document.getElementById("enrollForm").scrollIntoView({ behavior: "smooth" });
+  }
+
+  const predefinedResponses = {
+    "hello": "Hello! 👋 I am your AI Career Helper. Ask me about Jobs, Internships, Courses, or website guidance.",
+    "hi": "Hi there! 😊 I can help you find jobs, internships, courses, and guide you on using this website.",
+    "courses": "Here are some top courses: Python Basics – NPTEL, AI for Everyone – Coursera, Web Dev Bootcamp – YouTube, Data Science Essentials – EdX.",
+    "jobs": "Visit the Jobs page to explore job openings.",
+    "internships": "Visit the Internships page to check available internships.",
+    "how to enroll": "Click 'Enroll Now' on the course card and fill the enrollment form.",
+    "thank you": "You're welcome! 😊 Ask me more questions anytime.",
+    "default": "I am your AI Career Helper. Ask me about Jobs, Internships, Courses, or navigation tips."
+  };
+
+  function findResponse(message) {
+    message = message.toLowerCase();
+    for (const key in predefinedResponses) {
+      if (message.includes(key)) return predefinedResponses[key];
+    }
+    return predefinedResponses["default"];
+  }
+
+  function sendMessage() {
+    let input = document.getElementById("chatInput");
+    let messages = document.getElementById("chatMessages");
+
+    if (input.value.trim() !== "") {
+      let userMsg = document.createElement("div");
+      userMsg.style.color = "#0072ff";
+      userMsg.style.margin = "8px 0";
+      userMsg.textContent = "You: " + input.value;
+      messages.appendChild(userMsg);
+      messages.scrollTop = messages.scrollHeight;
+
+      let message = input.value.trim();
+      input.value = "";
+
+      let reply = findResponse(message);
+
+      let botMsg = document.createElement("div");
+      botMsg.style.color = "#333";
+      botMsg.style.margin = "8px 0";
+      botMsg.textContent = "Bot: " + reply;
+      messages.appendChild(botMsg);
+      messages.scrollTop = messages.scrollHeight;
+    }
+  }
+
+  function toggleChat() {
+    let chat = document.getElementById("chatbox");
+    chat.style.display = (chat.style.display === "flex") ? "none" : "flex";
+  }
+
+  document.getElementById("courseForm").addEventListener("submit", function(e) {
+    e.preventDefault();
+    alert("Enrollment submitted successfully!");
+    this.reset();
+  });
+</script>
+
+</body>
+</html>

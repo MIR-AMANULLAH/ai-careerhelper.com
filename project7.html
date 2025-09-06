@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CareerHelper – Courses</title>
+<style>
+  body { margin:0; font-family:"Segoe UI", Roboto, sans-serif; background:#f8f9fb; color:#333; line-height:1.6; }
+  header { display:flex; justify-content:space-between; align-items:center; padding:20px 60px; background:#fff; box-shadow:0 2px 10px rgba(0,0,0,0.05); position:sticky; top:0; z-index:1000; }
+  header h1 { font-size:24px; color:#0072ff; font-weight:bold; cursor:pointer; }
+  nav a { margin:0 15px; text-decoration:none; color:#333; font-weight:500; transition:0.3s; }
+  nav a:hover { color:#0072ff; }
+  .hero { background:linear-gradient(to right,#0072ff,#00c6ff); color:white; text-align:center; padding:120px 20px; }
+  .hero h2 { font-size:52px; margin-bottom:15px; }
+  .hero p { font-size:20px; margin-bottom:30px; }
+  .cards { display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:30px; }
+  .card { background:#fff; border-radius:12px; padding:25px; box-shadow:0 5px 20px rgba(0,0,0,0.1); transition:0.3s; }
+  .card:hover { transform:translateY(-8px); box-shadow:0 8px 25px rgba(0,0,0,0.15); }
+  .card h4 { margin-bottom:10px; font-size:20px; color:#0072ff; }
+  .card p { font-size:15px; color:#555; }
+  .card .enroll-btn { margin-top:10px; padding:10px 16px; background:#0072ff; color:white; border:none; border-radius:8px; cursor:pointer; transition:0.3s; }
+  .card .enroll-btn:hover { background:#005edc; }
+  .form-section { padding:80px 60px; max-width:600px; margin:auto; background:#fff; border-radius:12px; box-shadow:0 5px 20px rgba(0,0,0,0.1); margin-bottom:60px; }
+  .form-section h3 { text-align:center; color:#0072ff; margin-bottom:30px; }
+  .form-section label { display:block; margin-bottom:8px; font-weight:500; }
+  .form-section input { width:100%; padding:12px; margin-bottom:20px; border:1px solid #ccc; border-radius:8px; outline:none; font-size:14px; }
+  .form-section button { padding:12px 20px; background:#0072ff; color:white; border:none; border-radius:8px; cursor:pointer; font-size:16px; transition:0.3s; }
+  .form-section button:hover { background:#005edc; }
+</style>
+</head>
+<body>
+
+<header>
+  <h1 onclick="window.location.href='index.html'">CareerHelper</h1>
+  <nav>
+    <a href="project5.html">Jobs</a>
+    <a href="project6.html">Internships</a>
+    <a href="project7.html">Courses</a>
+    <a href="project8.html">Chat</a>
+  </nav>
+</header>
+
+<div class="hero">
+  <h2>Skill Courses for Your Career</h2>
+  <p>Enhance your skills with top-rated courses in Python, AI, Web Development, and Java.</p>
+</div>
+
+<section>
+  <h3>Recommended Courses</h3>
+  <div class="cards">
+    <div class="card">
+      <h4>Python Basics – NPTEL</h4>
+      <p>Learn Python programming with real-world projects.</p>
+      <button class="enroll-btn" onclick="scrollToForm('Python Basics – NPTEL')">Enroll Now</button>
+    </div>
+    <div class="card">
+      <h4>AI for Everyone – Coursera</h4>
+      <p>Understand AI concepts without coding.</p>
+      <button class="enroll-btn" onclick="scrollToForm('AI for Everyone – Coursera')">Enroll Now</button>
+    </div>
+    <div class="card">
+      <h4>Web Dev Bootcamp – YouTube</h4>
+      <p>Free hands-on full-stack web development course.</p>
+      <button class="enroll-btn" onclick="scrollToForm('Web Dev Bootcamp – YouTube')">Enroll Now</button>
+    </div>
+    <div class="card">
+      <h4>Java Advanced – Udemy</h4>
+      <p>Deep dive into Java, Spring Boot, and advanced backend development.</p>
+      <button class="enroll-btn" onclick="scrollToForm('Java Advanced – Udemy')">Enroll Now</button>
+    </div>
+  </div>
+</section>
+
+<section class="form-section" id="applyForm">
+  <h3>Course Enrollment Form</h3>
+  <form id="courseForm">
+    <label for="courseTitle">Course Name</label>
+    <input type="text" id="courseTitle" name="courseTitle" readonly>
+
+    <label for="fullName">Full Name</label>
+    <input type="text" id="fullName" name="fullName" required>
+
+    <label for="email">Email Address</label>
+    <input type="email" id="email" name="email" required>
+
+    <label for="phone">Phone Number</label>
+    <input type="tel" id="phone" name="phone" required>
+
+    <button type="submit">Submit Enrollment</button>
+  </form>
+</section>
+
+<script>
+  function scrollToForm(course) {
+    document.getElementById('courseTitle').value = course;
+    document.getElementById('applyForm').scrollIntoView({ behavior: 'smooth' });
+  }
+
+  document.getElementById('courseForm').addEventListener('submit', function(e){
+    e.preventDefault();
+
+    const course = document.getElementById('courseTitle').value;
+    const name = document.getElementById('fullName').value;
+    const email = document.getElementById('email').value;
+    const phone = document.getElementById('phone').value;
+
+    // Store enrollment inside the browser (local storage)
+    const enrollment = { course, name, email, phone };
+    let enrollments = JSON.parse(localStorage.getItem('enrollments') || '[]');
+    enrollments.push(enrollment);
+    localStorage.setItem('enrollments', JSON.stringify(enrollments));
+
+    alert(`Enrollment submitted!\nCourse: ${course}\nName: ${name}`);
+    this.reset();
+  });
+</script>
+
+</body>
+</html>
