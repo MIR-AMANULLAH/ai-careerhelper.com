@@ -5,125 +5,144 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>CareerHelper – Login</title>
   <style>
-    /* Global Styles */
+    *{margin:0;padding:0;box-sizing:border-box;transition:all .3s ease}
     body {
-      margin: 0;
-      padding: 0;
-      font-family: 'Segoe UI', Roboto, sans-serif;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      min-height: 100vh;
-      background: linear-gradient(to right, #4facfe, #00f2fe);
-      transition: background 0.3s;
+      font-family:'Segoe UI',Roboto,sans-serif;
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      min-height:100vh;
+      transition:background .5s,color .5s;
+
+      background:linear-gradient(270deg,#ff6ec4,#7873f5,#4ade80,#00c6ff,#f9d423);
+      background-size:1000% 1000%;
+      animation:slideBg 12s ease infinite;
+    }
+    @keyframes slideBg {
+      0%{background-position:0% 50%}
+      25%{background-position:50% 50%}
+      50%{background-position:100% 50%}
+      75%{background-position:50% 50%}
+      100%{background-position:0% 50%}
     }
 
+    /* Dark Mode */
     body.dark-mode {
-      background: linear-gradient(to right, #1e1e1e, #333333);
-      color: #f0f0f0;
+      background:#0f172a;
+      animation:none;
+      color:#f1f5f9;
     }
 
     .login-box {
-      background: white;
-      padding: 40px;
-      border-radius: 15px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-      width: 350px;
-      text-align: center;
-      transition: background 0.3s, color 0.3s;
+      background:#fff;
+      padding:40px 30px;
+      border-radius:15px;
+      box-shadow:0 8px 25px rgba(0,0,0,0.25);
+      width:350px;
+      text-align:center;
+      animation:fadeIn .6s ease;
+      transition:background .3s,color .3s;
     }
-
     body.dark-mode .login-box {
-      background: #2c2c2c;
-      color: #f0f0f0;
+      background:#1e293b;
+      color:#f1f5f9;
+      box-shadow:0 8px 25px rgba(255,255,255,.08);
     }
 
     .login-box h2 {
-      margin-bottom: 20px;
-      font-weight: bold;
-      color: #0072ff;
-      transition: color 0.3s;
+      margin-bottom:20px;
+      font-size:1.8rem;
+      font-weight:700;
+      color:#0072ff;
     }
-
-    body.dark-mode .login-box h2 {
-      color: #00c6ff;
-    }
+    body.dark-mode .login-box h2 {color:#38bdf8}
 
     .login-box input {
-      width: 100%;
-      padding: 12px;
-      margin: 10px 0;
-      border: 1px solid #ccc;
-      border-radius: 8px;
-      font-size: 16px;
-      transition: border 0.3s, background 0.3s, color 0.3s;
+      width:100%;
+      padding:12px;
+      margin:10px 0;
+      border:1px solid #ccc;
+      border-radius:8px;
+      font-size:16px;
     }
-
+    .login-box input:focus {
+      border-color:#0072ff;
+      box-shadow:0 0 8px rgba(0,114,255,.4);
+      outline:none;
+    }
     body.dark-mode .login-box input {
-      background: #444;
-      border: 1px solid #666;
-      color: #f0f0f0;
+      background:#2a2a2a;
+      border:1px solid #555;
+      color:#eee;
+    }
+    body.dark-mode .login-box input:focus {
+      border-color:#38bdf8;
+      box-shadow:0 0 8px rgba(56,189,248,.4);
     }
 
     .login-box button {
-      width: 100%;
-      padding: 12px;
-      background: #4facfe;
-      border: none;
-      border-radius: 8px;
-      font-size: 18px;
-      color: white;
-      cursor: pointer;
-      margin-top: 10px;
-      transition: all 0.3s;
+      width:100%;
+      padding:12px;
+      margin-top:10px;
+      border:none;
+      border-radius:8px;
+      font-size:18px;
+      font-weight:600;
+      color:#fff;
+      background:#4facfe;
+      cursor:pointer;
     }
-
     .login-box button:hover {
-      background: #00c6ff;
-      transform: translateY(-2px);
+      background:#00c6ff;
+      transform:translateY(-2px);
+      box-shadow:0 5px 15px rgba(0,0,0,.2);
+    }
+    body.dark-mode .login-box button {
+      background:#007bff;
+    }
+    body.dark-mode .login-box button:hover {
+      background:#005edc;
     }
 
     .login-box a {
-      display: inline-block;
-      margin-top: 15px;
-      font-size: 14px;
-      color: #4facfe;
-      text-decoration: none;
-      transition: color 0.3s;
+      display:inline-block;
+      margin-top:15px;
+      font-size:.95rem;
+      color:#0072ff;
+      text-decoration:none;
+      font-weight:500;
     }
+    .login-box a:hover {text-decoration:underline}
 
-    .login-box a:hover {
-      text-decoration: underline;
-      color: #0072ff;
-    }
-
-    /* Dark mode toggle */
+    /* Dark Toggle Button */
     .dark-toggle {
-      position: absolute;
-      top: 20px;
-      right: 20px;
-      padding: 10px 20px;
-      background: #0072ff;
-      color: white;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
-      transition: background 0.3s;
+      position:absolute;
+      top:20px;right:20px;
+      padding:6px 14px;
+      border:none;
+      border-radius:20px;
+      background:#1e293b;
+      color:#f1f5f9;
+      cursor:pointer;
+      font-size:.85rem;
+      box-shadow:0 3px 10px rgba(0,0,0,.2);
     }
-    .dark-toggle:hover {
-      background: #005edc;
+    .dark-toggle:hover {background:#334155}
+
+    @keyframes fadeIn {
+      from{opacity:0;transform:translateY(20px)}
+      to{opacity:1;transform:translateY(0)}
     }
 
     /* Responsive */
-    @media (max-width: 480px) {
-      .login-box { width: 90%; padding: 25px; }
-      .login-box h2 { font-size: 1.5rem; }
-      .login-box input, .login-box button { font-size: 1rem; padding: 10px; }
+    @media(max-width:480px){
+      .login-box{width:90%;padding:25px}
+      .login-box h2{font-size:1.5rem}
+      .login-box input,.login-box button{font-size:1rem;padding:10px}
     }
   </style>
 </head>
 <body>
-
   <button class="dark-toggle" onclick="toggleDarkMode()">🌙 Dark Mode</button>
 
   <div class="login-box">
@@ -135,27 +154,34 @@
   </div>
 
   <script>
-    // Dark Mode Toggle
-    function toggleDarkMode() {
+    function toggleDarkMode(){
       document.body.classList.toggle('dark-mode');
+      localStorage.setItem("darkMode", document.body.classList.contains("dark-mode"));
+      const btn=document.querySelector('.dark-toggle');
+      btn.textContent=document.body.classList.contains("dark-mode")?"☀️ Light Mode":"🌙 Dark Mode";
     }
 
-    // Login Function
-    function login() {
-      let name = document.getElementById("loginName").value.trim();
-      let pass = document.getElementById("loginPass").value.trim();
-      let user = JSON.parse(localStorage.getItem("user"));
+    window.onload=function(){
+      if(localStorage.getItem("darkMode")==="true"){
+        document.body.classList.add("dark-mode");
+        document.querySelector('.dark-toggle').textContent="☀️ Light Mode";
+      }
+    }
 
-      if (!user) {
+    function login(){
+      let name=document.getElementById("loginName").value.trim();
+      let pass=document.getElementById("loginPass").value.trim();
+      let user=JSON.parse(localStorage.getItem("user"));
+
+      if(!user){
         alert("No account found! Please create one first.");
         return;
       }
-
-      if (name === user.name && pass === user.pass) {
+      if(name===user.name && pass===user.pass){
         alert("Login successful!");
-        localStorage.setItem("loggedInUser", name);
-        window.location.href = "project4.html"; // Redirect to main page
-      } else {
+        localStorage.setItem("loggedInUser",name);
+        window.location.href="project4.html";
+      }else{
         alert("Wrong Username or Password. Try again!");
       }
     }

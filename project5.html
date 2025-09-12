@@ -5,38 +5,55 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>CareerHelper – Internships</title>
 <style>
-body {margin:0;font-family:"Segoe UI", Roboto, sans-serif;background:#f8f9fb;color:#333;line-height:1.6;}
-header {display:flex;justify-content:space-between;align-items:center;padding:20px 60px;background:#fff;box-shadow:0 2px 10px rgba(0,0,0,0.05);position:sticky;top:0;z-index:1000;}
+body {margin:0;font-family:"Segoe UI", Roboto, sans-serif;background:#f8f9fb;color:#333;line-height:1.6;transition:background 0.3s,color 0.3s;}
+body.dark-mode {background:#1e1e1e;color:#f0f0f0;}
+header {display:flex;justify-content:space-between;align-items:center;padding:20px 60px;background:#fff;box-shadow:0 2px 10px rgba(0,0,0,0.05);position:sticky;top:0;z-index:1000;transition:background 0.3s,color 0.3s;}
+body.dark-mode header {background:#222;color:#f0f0f0;}
 header h1 {font-size:24px;color:#0072ff;font-weight:bold;cursor:pointer;}
 nav a {margin:0 15px;text-decoration:none;color:#333;font-weight:500;transition:0.3s;}
+body.dark-mode nav a {color:#f0f0f0;}
 nav a:hover {color:#0072ff;}
-.hero {background:linear-gradient(to right,#0072ff,#00c6ff);color:white;text-align:center;padding:120px 20px;}
+.dark-toggle {padding:8px 15px;background:#0072ff;color:white;border:none;border-radius:8px;cursor:pointer;transition:0.3s;font-size:16px;}
+.dark-toggle:hover {background:#005edc;}
+.hero {background:linear-gradient(to right,#0072ff,#00c6ff);color:white;text-align:center;padding:120px 20px;transition:background 0.3s;}
+body.dark-mode .hero {background:linear-gradient(to right,#141e30,#243b55);}
 .hero h2 {font-size:52px;margin-bottom:15px;}
 .hero p {font-size:20px;margin-bottom:30px;}
 .cards {display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:30px;}
 .card {background:#fff;border-radius:12px;padding:25px;box-shadow:0 5px 20px rgba(0,0,0,0.1);transition:0.3s;}
+body.dark-mode .card {background:#2c2c2c;color:#f0f0f0;}
 .card:hover {transform:translateY(-8px);box-shadow:0 8px 25px rgba(0,0,0,0.15);}
 .card h4 {margin-bottom:10px;font-size:20px;color:#0072ff;}
+body.dark-mode .card h4 {color:#00c6ff;}
 .card p {font-size:15px;color:#555;}
+body.dark-mode .card p {color:#ccc;}
 .card .apply-btn {margin-top:10px;padding:10px 16px;background:#0072ff;color:white;border:none;border-radius:8px;cursor:pointer;transition:0.3s;}
 .card .apply-btn:hover {background:#005edc;}
-.form-section {padding:60px;max-width:600px;margin:auto;background:#fff;border-radius:12px;box-shadow:0 5px 20px rgba(0,0,0,0.1);margin-bottom:40px;}
+.form-section {padding:60px;max-width:600px;margin:auto;background:#fff;border-radius:12px;box-shadow:0 5px 20px rgba(0,0,0,0.1);margin-bottom:40px;transition:0.3s;}
+body.dark-mode .form-section {background:#2c2c2c;color:#f0f0f0;}
 .form-section h3 {text-align:center;color:#0072ff;margin-bottom:30px;}
+body.dark-mode .form-section h3 {color:#00c6ff;}
 .form-section label {display:block;margin-bottom:8px;font-weight:500;}
 .form-section input {width:100%;padding:12px;margin-bottom:15px;border:1px solid #ccc;border-radius:8px;outline:none;}
+body.dark-mode .form-section input {background:#444;color:#f0f0f0;border:1px solid #666;}
 .form-section button {padding:12px 20px;background:#0072ff;color:white;border:none;border-radius:8px;cursor:pointer;font-size:16px;}
 .form-section button:hover {background:#005edc;}
 .vcard-container {max-width:800px;margin:20px auto;display:flex;flex-wrap:wrap;gap:20px;}
-.vcard {background:#fff;padding:20px;border-radius:12px;box-shadow:0 5px 15px rgba(0,0,0,0.1);width:250px;text-align:center;}
+.vcard {background:#fff;padding:20px;border-radius:12px;box-shadow:0 5px 15px rgba(0,0,0,0.1);width:250px;text-align:center;transition:0.3s;}
+body.dark-mode .vcard {background:#2c2c2c;color:#f0f0f0;}
 .vcard img {width:100px;height:100px;border-radius:50%;object-fit:cover;margin-bottom:10px;}
 .vcard h4 {margin:5px 0;color:#0072ff;}
+body.dark-mode .vcard h4 {color:#00c6ff;}
 .vcard p {margin:3px 0;font-size:14px;color:#555;}
+body.dark-mode .vcard p {color:#ccc;}
 .chatbot-btn {position:fixed;bottom:20px;right:20px;background:#0072ff;border:none;border-radius:50%;width:60px;height:60px;cursor:pointer;font-size:24px;color:white;box-shadow:0 0 15px rgba(0,114,255,0.4);z-index:1000;}
-.chatbot-box {position:fixed;bottom:90px;right:20px;width:350px;height:500px;background:#fff;border-radius:15px;display:none;flex-direction:column;box-shadow:0 5px 25px rgba(0,0,0,0.2);overflow:hidden;}
+.chatbot-box {position:fixed;bottom:90px;right:20px;width:350px;height:500px;background:#fff;border-radius:15px;display:none;flex-direction:column;box-shadow:0 5px 25px rgba(0,0,0,0.2);overflow:hidden;transition:0.3s;}
+body.dark-mode .chatbot-box {background:#2c2c2c;color:#f0f0f0;}
 .chat-header {padding:12px;background:#0072ff;color:#fff;font-weight:bold;text-align:center;}
 .chat-messages {flex:1;padding:15px;overflow-y:auto;font-size:14px;}
 .chat-input {display:flex;border-top:1px solid #ddd;}
 .chat-input input {flex:1;padding:12px;border:none;outline:none;}
+body.dark-mode .chat-input input {background:#444;color:#f0f0f0;}
 .chat-input button {background:#0072ff;border:none;color:white;padding:12px 18px;cursor:pointer;}
 </style>
 </head>
@@ -50,6 +67,7 @@ nav a:hover {color:#0072ff;}
     <a href="project7.html">Courses</a>
     <a href="project8.html">Chat</a>
   </nav>
+  <button class="dark-toggle" id="darkToggle" onclick="toggleDarkMode()">🌙</button>
 </header>
 
 <div class="hero">
@@ -57,6 +75,7 @@ nav a:hover {color:#0072ff;}
   <p>Gain hands-on experience with top companies and enhance your skills.</p>
 </div>
 
+<!-- Internships Section -->
 <section>
   <h3>Available Internship Opportunities</h3>
   <div class="cards">
@@ -83,33 +102,27 @@ nav a:hover {color:#0072ff;}
   </div>
 </section>
 
-<!-- Form Section -->
+<!-- Application Form -->
 <section class="form-section" id="applyForm">
   <h3>Internship Application Form</h3>
   <form id="internForm" enctype="multipart/form-data">
     <label for="internTitle">Applying For</label>
     <input type="text" id="internTitle" name="internTitle" readonly>
-
     <label for="fullName">Full Name</label>
     <input type="text" id="fullName" name="fullName" required>
-
     <label for="email">Email Address</label>
     <input type="email" id="email" name="email" required>
-
     <label for="phone">Phone Number</label>
     <input type="tel" id="phone" name="phone" required>
-
     <label for="photo">Upload Photo</label>
     <input type="file" id="photo" name="photo" accept="image/*" required>
-
     <label for="cv">Upload CV (PDF only)</label>
     <input type="file" id="cv" name="cv" accept=".pdf" required>
-
     <button type="submit">Submit Application</button>
   </form>
 </section>
 
-<!-- vCard display -->
+<!-- vCard Container -->
 <div class="vcard-container" id="vcardContainer"></div>
 
 <!-- Chatbot -->
@@ -124,6 +137,20 @@ nav a:hover {color:#0072ff;}
 </div>
 
 <script>
+function toggleDarkMode() {
+  document.body.classList.toggle('dark-mode');
+  const isDark = document.body.classList.contains('dark-mode');
+  localStorage.setItem('darkMode', isDark);
+  document.getElementById("darkToggle").textContent = isDark ? "☀️" : "🌙";
+}
+window.onload = function() {
+  const darkPref = localStorage.getItem('darkMode') === 'true';
+  if (darkPref) {
+    document.body.classList.add('dark-mode');
+    document.getElementById("darkToggle").textContent = "☀️";
+  }
+};
+
 function scrollToForm(internship) {
   document.getElementById("internTitle").value = internship;
   document.getElementById("applyForm").scrollIntoView({ behavior: "smooth" });
@@ -139,7 +166,6 @@ const predefinedResponses = {
   "thank you": "You're welcome! 😊 Ask me more questions anytime.",
   "default": "I am your AI Career Helper. Ask me about Internships, Jobs, Courses, or navigation tips."
 };
-
 function findResponse(message) {
   message = message.toLowerCase();
   for (const key in predefinedResponses) {
@@ -147,87 +173,48 @@ function findResponse(message) {
   }
   return predefinedResponses["default"];
 }
-
 function sendMessage() {
   let input = document.getElementById("chatInput");
   let messages = document.getElementById("chatMessages");
-
   if (input.value.trim() !== "") {
     let userMsg = document.createElement("div");
-    userMsg.style.color = "#0072ff";
-    userMsg.style.margin = "8px 0";
+    userMsg.style.color = "#0072ff"; userMsg.style.margin = "8px 0";
     userMsg.textContent = "You: " + input.value;
-    messages.appendChild(userMsg);
-    messages.scrollTop = messages.scrollHeight;
-
-    let message = input.value.trim();
-    input.value = "";
-
-    let reply = findResponse(message);
-
+    messages.appendChild(userMsg); messages.scrollTop = messages.scrollHeight;
+    let reply = findResponse(input.value.trim());
     let botMsg = document.createElement("div");
-    botMsg.style.color = "#333";
-    botMsg.style.margin = "8px 0";
+    botMsg.style.color = "#333"; botMsg.style.margin = "8px 0";
     botMsg.textContent = "Bot: " + reply;
-    messages.appendChild(botMsg);
-    messages.scrollTop = messages.scrollHeight;
+    messages.appendChild(botMsg); messages.scrollTop = messages.scrollHeight;
+    input.value = "";
   }
 }
-
 function toggleChat() {
   let chat = document.getElementById("chatbox");
   chat.style.display = (chat.style.display === "flex") ? "none" : "flex";
 }
-
-// Form submit handling with vCard
 document.getElementById("internForm").addEventListener("submit", function(e){
   e.preventDefault();
-
   const name = document.getElementById("fullName").value;
   const email = document.getElementById("email").value;
   const phone = document.getElementById("phone").value;
   const internship = document.getElementById("internTitle").value;
   const photoFile = document.getElementById("photo").files[0];
-
-  if(!photoFile){
-    alert("Please upload a photo!");
-    return;
-  }
-
+  if(!photoFile){ alert("Please upload a photo!"); return; }
   const reader = new FileReader();
   reader.onload = function(e){
     const vcardContainer = document.getElementById("vcardContainer");
-
-    const card = document.createElement("div");
-    card.className = "vcard";
-
-    const img = document.createElement("img");
-    img.src = e.target.result;
-    card.appendChild(img);
-
-    const h4 = document.createElement("h4");
-    h4.textContent = name;
-    card.appendChild(h4);
-
-    const pIntern = document.createElement("p");
-    pIntern.textContent = "Internship: "+internship;
-    card.appendChild(pIntern);
-
-    const pEmail = document.createElement("p");
-    pEmail.textContent = "Email: "+email;
-    card.appendChild(pEmail);
-
-    const pPhone = document.createElement("p");
-    pPhone.textContent = "Phone: "+phone;
-    card.appendChild(pPhone);
-
+    const card = document.createElement("div"); card.className = "vcard";
+    const img = document.createElement("img"); img.src = e.target.result; card.appendChild(img);
+    const h4 = document.createElement("h4"); h4.textContent = name; card.appendChild(h4);
+    const pIntern = document.createElement("p"); pIntern.textContent = "Internship: "+internship; card.appendChild(pIntern);
+    const pEmail = document.createElement("p"); pEmail.textContent = "Email: "+email; card.appendChild(pEmail);
+    const pPhone = document.createElement("p"); pPhone.textContent = "Phone: "+phone; card.appendChild(pPhone);
     vcardContainer.appendChild(card);
   }
   reader.readAsDataURL(photoFile);
-
   this.reset();
 });
 </script>
-
 </body>
 </html>
